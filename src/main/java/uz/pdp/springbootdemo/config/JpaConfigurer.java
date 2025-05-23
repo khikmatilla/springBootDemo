@@ -3,6 +3,7 @@ package uz.pdp.springbootdemo.config;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -16,6 +17,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@PropertySource("classpath:applications.properties")
 @EnableJpaRepositories(basePackages = "uz.pdp.springbootdemo")
 public class JpaConfigurer {
 
@@ -40,7 +42,7 @@ public class JpaConfigurer {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPackagesToScan("base_backage");
+        entityManagerFactoryBean.setPackagesToScan("uz.pdp.springbootdemo");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
@@ -54,6 +56,7 @@ public class JpaConfigurer {
         EntityManagerFactory entityManagerFactory = entityManagerFactoryBean.getObject();
         return new JpaTransactionManager(entityManagerFactory);
     }
+
 
     private Properties jpaProperties() {
         Properties properties = new Properties();
