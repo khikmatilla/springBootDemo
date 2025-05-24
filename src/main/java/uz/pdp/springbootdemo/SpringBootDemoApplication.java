@@ -16,10 +16,16 @@ public class SpringBootDemoApplication {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfigurer.class);
         BookRepository bookRepository = context.getBean(BookRepository.class);
-        Book book = Book.builder()
-                .name("Spring Boot")
-                .author("James Bond")
-                .build();
-        bookRepository.save(book);
+//        Book book = Book.builder()
+//                .name("Database Design Patterns")
+//                .author("Lok")
+//                .build();
+//        bookRepository.save(book);
+        bookRepository.findAll().forEach(System.out::println);
+        bookRepository.findById(1L).ifPresentOrElse(System.out::println, () -> {
+            System.out.println("Book not found");
+        });
+        bookRepository.deleteById(2L);
+
     }
 }
