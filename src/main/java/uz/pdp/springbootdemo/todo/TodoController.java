@@ -1,5 +1,6 @@
 package uz.pdp.springbootdemo.todo;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
-public class PostController {
+public class TodoController {
     private final TodoRepository todoRepository;
 
-    public PostController(TodoRepository todoRepository) {
+    public TodoController(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 
@@ -24,17 +25,18 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Todo>> getAllTodo() {
+    public ResponseEntity<List<Todo>> getAllTodo(TodoCriteria criteria) {
         List<Todo> todos = todoRepository.findAll();
         return ResponseEntity.ok(todos);
     }
 
+    @Operation(summary = "This Api Delete Todo by ID", deprecated = true)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Integer id) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Todo Not Found With ID: " + id));
-        todoRepository.delete(todo);
-        return ResponseEntity.notFound().build();
+        todoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/")

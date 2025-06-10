@@ -17,8 +17,9 @@ import lombok.Setter;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer todoId;
     private Integer userId;
+    private Integer id;
     private String title;
     private boolean completed;
 }
