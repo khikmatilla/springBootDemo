@@ -1,18 +1,19 @@
 package uz.pdp.springbootdemo.project;
 
-import org.mapstruct.MapMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+import uz.pdp.springbootdemo.projectColumn.ProjectColumnMapper;
 
 import java.nio.file.Path;
 
-@Mapper
+@Mapper(uses = {ProjectColumnMapper.class})
 public interface ProjectMapper {
     ProjectMapper PROJECT_MAPPER = Mappers.getMapper(ProjectMapper.class);
 
     @Mapping(target = "documentPath", source = "documentPath", qualifiedByName = "pathToString")
+    @Mapping(target = "createdAt", source = "createdAt", dateFormat = "dd-MM-YYYY")
     ProjectDTO toDTO(Project project);
 
     @Named("pathToString")

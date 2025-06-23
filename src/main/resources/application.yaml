@@ -1,0 +1,7 @@
+example:
+  current-user:
+    id: ${random.uuid}
+    firstName: system
+    lastName: system
+    middleName: system
+    userType: INTERNAL

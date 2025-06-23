@@ -1,8 +1,10 @@
 package uz.pdp.springbootdemo.project;
 
 import lombok.*;
+import uz.pdp.springbootdemo.projectColumn.ProjectColumnDTO;
 
 import java.nio.file.Path;
+import java.util.List;
 
 @ToString
 @AllArgsConstructor
@@ -14,5 +16,6 @@ public class ProjectDTO {
     private String id;
     private String name;
     private String documentPath;
-    //private List<ProjectColumn> projectColumns;
+    private List<ProjectColumnDTO> projectColumns;
+    private String createdAt;
 }
