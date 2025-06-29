@@ -1,0 +1,37 @@
+
+spring:
+  profiles:
+    active: prod
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: c0955706b94cef
+    password: 7f75ff82850424
+    properties:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hikmatillahabibullayev1999@gmail.com
+    password: fbstcqwkfkooocnj
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
